@@ -21,11 +21,13 @@ def main():
     YELLOW = (0,255,255)
     BLACK = (0,0,0)
     WHITE = (255,255,255)
-    mainSurface = pygame.display.set_mode((1366,768))
-    nodeCount = 50 #number of nodes - 1
+    mainSurface = pygame.display.set_mode((2000,1000))
+    nodeCount = 40 #number of nodes - 1
     showPathFinding = False
     edgeThickness = 1
     finalEdgeThickness = 3
+    nodeRadius = 5
+    nodeThickness = 0
     unconnectedNodes = []
     connectedNodes = []
     edgeArray = []
@@ -36,9 +38,9 @@ def main():
 
     #init
     for i in range(0,nodeCount):
-        unconnectedNodes.append(Node(random.randint(1,1365),random.randint(1,768)))
+        unconnectedNodes.append(Node(random.randint(1,2000),random.randint(1,1000)))
         for eachnode in unconnectedNodes:
-            pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),5,0)
+            pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),nodeRadius,nodeThickness)
         pygame.display.update()
         clock.tick(FPS)
     #find starting point
@@ -60,7 +62,7 @@ def main():
                 pygame.draw.line(mainSurface,BLUE,(line.xPos1,line.yPos1),(line.xPos2,line.yPos2),edgeThickness)
             pygame.draw.line(mainSurface,GREEN,(superShortestEdge.xPos1,superShortestEdge.yPos1),(superShortestEdge.xPos2,superShortestEdge.yPos2),edgeThickness)
             for eachnode in unconnectedNodes:
-                pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),5,0)
+                pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),nodeRadius,nodeThickness)
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
@@ -91,9 +93,9 @@ def main():
                     pygame.draw.line(mainSurface,GREEN,(connectedEdge.xPos1,connectedEdge.yPos1),(connectedEdge.xPos2,connectedEdge.yPos2),finalEdgeThickness)
                 pygame.draw.line(mainSurface,DEVPINK,(startNode.xPos,startNode.yPos),(endNode.xPos,endNode.yPos),edgeThickness)
                 for eachnode in unconnectedNodes:
-                    pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),5,0)
+                    pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),nodeRadius,nodeThickness)
                 for eachnode in connectedNodes:
-                    pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),5,0)
+                    pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),nodeRadius,nodeThickness)
                 pygame.display.update()
                 for event in pygame.event.get():
                     if event.type == QUIT:
@@ -110,9 +112,9 @@ def main():
         for connectedEdge in connectedEdgeArray:
             pygame.draw.line(mainSurface,GREEN,(connectedEdge.xPos1,connectedEdge.yPos1),(connectedEdge.xPos2,connectedEdge.yPos2),finalEdgeThickness)
         for eachnode in unconnectedNodes:
-            pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),5,0)
+            pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),nodeRadius,nodeThickness)
         for eachnode in connectedNodes:
-            pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),5,0)
+            pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),nodeRadius,nodeThickness)
         pygame.display.update()
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -125,9 +127,9 @@ def main():
     for connectedEdge in connectedEdgeArray:
         pygame.draw.line(mainSurface,GREEN,(connectedEdge.xPos1,connectedEdge.yPos1),(connectedEdge.xPos2,connectedEdge.yPos2),finalEdgeThickness)
     for eachnode in unconnectedNodes:
-        pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),5,0)
+        pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),nodeRadius,nodeThickness)
     for eachnode in connectedNodes:
-        pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),5,0)
+        pygame.draw.circle(mainSurface,WHITE,(eachnode.xPos,eachnode.yPos),nodeRadius,nodeThickness)
     pygame.display.update()
     while True: #final loop
         for event in pygame.event.get():
